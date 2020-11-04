@@ -1,8 +1,7 @@
 from socket import *
 import logging
 
-logging.basicConfig(filename='ocr.log', filemode='a', level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
@@ -15,9 +14,9 @@ def client(host, port, data):
     # 此处与udp不同，客户端已经知道消息来自哪台服务器，不需要用recvfrom了
     recv_data = tcp_client_socket.recv(1024)
     if recv_data:
-        logger.info("返回的消息为:", recv_data.decode('utf-8'))
+        logger.info("Got response: %s", recv_data.decode('utf-8'))
     else:
-        logger.info()
+        logger.warning("Response is blank!!")
     tcp_client_socket.close()
 
 
