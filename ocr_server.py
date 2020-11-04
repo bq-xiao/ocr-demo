@@ -1,16 +1,22 @@
+import logging
 from abc import ABC
 
-from twisted.internet import reactor
-from twisted.internet.protocol import Factory
-from twisted.protocols.basic import LineReceiver
 import easyocr
-import logging
+from twisted.internet import reactor
+from twisted.internet.protocol import ServerFactory
+from twisted.protocols.basic import LineReceiver
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
 def server(port):
+    class SimpleServerFactory(ServerFactory):
+        reader = None
+
+        def __init__(self, reader):
+            self.reader = reader
+
     class SimpleReceiver(LineReceiver, ABC):
         def connectionMade(self):
             logger.info('Got connection from %s', self.transport.client)
@@ -23,7 +29,7 @@ def server(port):
                 logger.info("Received data ...")
             else:
                 logger.info("Received data:%s", data)
-            reader = easyocr.Reader(['ch_sim', 'en'])  # need to run only once to load model into memory
+
             result = reader.readtext(data, detail=0)
             str = '';
             for item in result:
@@ -31,7 +37,9 @@ def server(port):
             self.sendLine(str.encode())
             logger.info("Send response: %s", str)
 
-    factory = Factory()
+    # need to run only once to load model into memory
+    reader = easyocr.Reader(['ch_sim', 'en'])
+    factory = SimpleServerFactory(reader)
     factory.protocol = SimpleReceiver
     reactor.listenTCP(port, factory)
     logger.info("TCP server started on port(s): %s ..." % (port))
