@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+import sys, getopt
 import logging
 from abc import ABC
 
@@ -46,5 +50,34 @@ def server(port):
     reactor.run()
 
 
+def main(argv):
+    port = 0
+    if len(argv) == 0:
+        print('usage: ocr_server.py -p <port>')
+        sys.exit(1)
+    try:
+        opts, args = getopt.getopt(argv, "?hp:", ["port="])
+    except getopt.GetoptError:
+        print('usage: ocr_server.py -p <port>')
+        sys.exit(2)
+    if len(opts) == 0:
+        print('usage: ocr_server.py -p <port>')
+        sys.exit(3)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('usage: ocr_server.py -p <port>')
+            sys.exit()
+        elif opt in ("-p", "--port"):
+            port = arg
+        else:
+            print('usage: ocr_server.py -p <port>')
+            sys.exit(4)
+    if int(port) == 0:
+        print('usage: ocr_server.py -p <port>')
+        sys.exit(5)
+
+    server(int(port))
+
+
 if __name__ == '__main__':
-    server(9000)
+    main(sys.argv[1:])
