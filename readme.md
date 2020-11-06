@@ -7,14 +7,15 @@ Python版本：Python 3.8.6
 pip install easyocr
 pip install twisted
 pip install logging
+pip install django
 ```
 
 ### How to start OCR server
 ```shell script
-# python.exe ocr_server.py
-# usage: ocr_server.py -p <port>
+# python.exe ocr_engine.py
+# usage: ocr_engine.py -p <port>
 
-# python.exe ocr_server.py -p 8001
+# python.exe ocr_engine.py -p 8001
 2020-11-04 18:08:23,224 - easyocr.easyocr - WARNING - CUDA not available - defaulting to CPU. Note: This module is much faster with a GPU.
 2020-11-04 18:08:26,092 - __main__ - INFO - TCP server started on port(s): 8001 ...
 
