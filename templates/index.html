@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>OCR在线识别</title>
+    <style type="text/css">
+        .upload_file {
+            height: 100px;
+            width: 800px;
+           vertical-align:middle;
+        }
+        .upload_file form{
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        .result {
+            height: 100px;
+            line-height: 100px;
+            margin-left: 50px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload_file">
+        <form action="/ocr.html" method="POST" enctype="multipart/form-data">
+            上传图片: <input id="f" type="file" name="img">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+            <input id="sub" type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="result">
+        <b>识别结果：</b>
+        <b>{{ result }}</b>
+    </div>
+</body>
+</html>
