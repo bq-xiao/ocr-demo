@@ -19,14 +19,19 @@
             margin-left: 50px;
             font-size: 20px;
         }
+        h2{
+            margin-top: 20px;
+            margin-left: 50px;
+        }
     </style>
 </head>
 <body>
+    <h2>OCR在线识别系统</h2>
     <div class="upload_file">
         <form action="/ocr.html" method="POST" enctype="multipart/form-data">
             上传图片: <input id="f" type="file" name="img">
             <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
-            <input id="sub" type="submit" value="Submit">
+            <input id="sub" type="submit" value="文字识别">
         </form>
     </div>
     <div class="result">
