@@ -37,4 +37,4 @@ pip install django
 ### 关注作者
 头条号：云计算AND容器技术
 
-![云计算AND容器技术](https://dmd56-prod-1257348791.cos.ap-beijing.myqcloud.com/upload-img/20201106001001.png)
+![云计算AND容器技术](云计算AND容器技术.png)
