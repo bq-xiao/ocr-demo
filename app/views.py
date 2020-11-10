@@ -17,6 +17,6 @@ def ocr(request):
     tcp_client_socket.send(data)
     # 此处与udp不同，客户端已经知道消息来自哪台服务器，不需要用recvfrom了
     recv_data = tcp_client_socket.recv(1024)
-    result = recv_data.decode('utf-8')
+    result = recv_data.decode('utf-8', 'ignore')
     tcp_client_socket.close()
     return render(request, "index.html", {"result": result})
