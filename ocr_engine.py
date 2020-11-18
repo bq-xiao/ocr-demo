@@ -35,10 +35,10 @@ def server(port):
                 logger.info("Received data:%s", data)
 
             result = reader.readtext(data, detail=0)
-            str = '';
+            str = ''
             for item in result:
                 str = str + item
-            self.sendLine(str.encode())
+            self.sendLine(str.encode('utf-8'))
             logger.info("Send response: %s", str)
 
     # need to run only once to load model into memory
